@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ======== SCHEMA ========
+
+model Customer {
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  cpf          String        @unique
+  phone_number String?       // optional
+  pass         String
+  appointments Scheduling[]  // A customer may have multiple appointments
+}
+
+model Barber {
+  id           Int           @id @default(autoincrement())
+  name         String
+  contact      String?
+  cpf          String        @unique
+  specialty    String?
+  appointments Scheduling[]  // A barber may have multiple appointments
+}
+
+model Service {
+  id           Int           @id @default(autoincrement())
+  name         String
+  price        Float
+  duration_min Int
+  appointments Scheduling[]  // A service can be in multiple schedules
+}
+
+model Scheduling {
+  id           Int      @id @default(autoincrement())
+  date_time    DateTime
+  status       String   @default("Confirmed")
+
+  // Foreign key from Customer
+  customer_id  Int
+  customer     Customer @relation(fields: [customer_id], references: [id])
+
+  // Foreign key from Barber
+  barber_id    Int
+  barber       Barber @relation(fields: [barber_id], references: [id])
+
+  // Foreign key from Service
+  service_id   Int
+  service      Service  @relation(fields: [service_id], references: [id])
+}
