@@ -16,7 +16,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": ""
+    "dev": "nodemon, node src/server.js"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
