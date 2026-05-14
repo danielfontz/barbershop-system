@@ -18,6 +18,7 @@ export const verificarToken = (req, res, next) => {
 
     // Guardar o ID do utilizador no próprio pedido (req)
     req.clienteId = decodificado.id;
+    req.clienteId = decodificado.id;
     
     // Deixar passar para o controller
     next(); 

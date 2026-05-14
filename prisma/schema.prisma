@@ -16,6 +16,7 @@ model Customer {
   cpf          String        @unique
   phone_number String?       // optional
   pass         String
+  role         String        @default("USER")
   appointments Scheduling[]  // A customer may have multiple appointments
 }
 

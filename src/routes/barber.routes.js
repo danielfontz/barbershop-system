@@ -7,11 +7,13 @@ import {
     updateBarber,
     deleteBarber
 } from '../controllers/barber.controller.js';
+import { verificarToken } from '../middlewares/auth.middleware.js';
+import { eAdmin } from '../middlewares/admin.middleware.js';
 
 const router = express.Router();
 
 // C - Novo barbeiro
-router.post('/', createBarber);
+router.post('/', verificarToken, eAdmin,createBarber);
 
 // R - todos os barbeiros
 router.get('/', getAllBarbers);
@@ -20,9 +22,9 @@ router.get('/', getAllBarbers);
 router.get('/:id', getBarberById);
 
 // U - Um barbeiro existente pelo ID
-router.put('/:id', updateBarber);
+router.put('/:id', verificarToken, eAdmin, updateBarber);
 
 // D - Um barbeiro pelo ID
-router.delete('/:id', deleteBarber);
+router.delete('/:id', verificarToken, eAdmin, deleteBarber);
 
 export default router;
