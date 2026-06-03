@@ -73,6 +73,18 @@ export const login = async (req, res) => {
             process.env.JWT_SECRET,      // Chave secreta do .env
             { expiresIn: '1d' }          // Expira em 1 dia
         );
+
+        // Devolve o token e os dados do cliente
+        return res.status(200).json({
+            mensagem: "Login efetuado com sucesso!",
+            token: token,
+            cliente: {
+                id: clienteExistente.id,
+                nome: clienteExistente.name,
+                email: clienteExistente.email
+            }
+        });
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({ erro: "Erro interno do servidor." });
