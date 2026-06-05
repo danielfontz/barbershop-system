@@ -11,6 +11,9 @@ const prisma = new PrismaClient();
 const app = express();
 app.use(express.json());
 
+const cors = require('cors');
+app.use(cors());
+
 app.get('/', (req, res) => {
   res.send('Bem-vindo à API de agendamento de barbearia!');
 });
