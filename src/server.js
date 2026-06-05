@@ -11,6 +11,10 @@ const prisma = new PrismaClient();
 const app = express();
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Bem-vindo à API de agendamento de barbearia!');
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/barber', barberRoutes);
 app.use('/api/schedules', schedulingRoutes);
